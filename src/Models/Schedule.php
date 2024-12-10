@@ -19,24 +19,22 @@ class Schedule {
     }
 
     public function getAllSchedules() {
-        try {
-            $cursor = $this->collection->find([], ['sort' => ['day' => 1]]);
-            $schedules = [];
-            foreach ($cursor as $document) {
-                $schedules[] = [
-                    'id' => (string) $document['_id'], // Convertir l'ObjectId en chaîne
-                    'day' => $document['day'] ?? '',
-                    'opening_time' => $document['opening_time'] ?? '',
-                    'closing_time' => $document['closing_time'] ?? '',
-                    'is_closed' => $document['is_closed'] ?? false
-                ];
-            }
-            return $schedules;
-        } catch (\Throwable $e) {
-            error_log('Erreur générale : ' . $e->getMessage());
-            return [];
+        $cursor = $this->collection->find([], ['sort' => ['day' => 1]]);
+        $schedules = [];
+        foreach ($cursor as $document) {
+            $schedules[] = [
+                'id' => (string) $document['_id'],
+                'day' => $document['day'],
+                'opening_time' => $document['opening_time'],
+                'closing_time' => $document['closing_time'],
+                'is_closed' => $document['is_closed']
+            ];
         }
+        // Ajoutez un var_dump ici pour voir les données récupérées
+        var_dump($schedules);
+        return $schedules;
     }
+    
 
     public function insertSchedule($data) {
         try {

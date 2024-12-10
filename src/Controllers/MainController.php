@@ -24,11 +24,20 @@ class MainController {
 
         // Trouvez l'horaire pour aujourd'hui
         $todaySchedule = array_filter($schedules, function ($schedule) use ($today) {
-            return $schedule['day'] === $today;
+            return strtolower($schedule['day']) === strtolower($today);
         });
 
+        if (empty($todaySchedule)) {
+            echo "Aucun horaire trouvé pour le jour : " . $today;
+        }
+        
+        
         $todaySchedule = reset($todaySchedule); // Récupère le premier résultat (ou null si vide)
 
+        foreach ($schedules as $schedule) {
+            echo "Jour dans MongoDB : " . $schedule['day'] . "<br>";
+        }
+        
         // Variables à transmettre à la vue
         $view = __DIR__ . '/../../Views/home.php';  // Charge la vue home.php
         $pageTitle = 'Accueil'; 

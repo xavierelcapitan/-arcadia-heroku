@@ -2,36 +2,46 @@
 // Public/index.php
 
 use App\Config\Autoloader;
-use Dotenv\Dotenv; // Import du package dotenv
+use Dotenv\Dotenv;
 
-// Charger l'autoloader de votre application
+// Charger l'autoloader 
 require_once __DIR__ . '/../src/Config/Autoloader.php';
-// Charger l'autoloader de Composer
 require_once __DIR__ . '/../vendor/autoload.php';
 Autoloader::register();
 
-// Vérifiez si le fichier .env est nécessaire
+// Charger les variables d'environnement si le fichier .env existe
 if (file_exists(__DIR__ . '/../.env')) {
     $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
     $dotenv->load();
 }
 
-// Récupérer le controller et l'action depuis les paramètres d'URL (ou par défaut)
+// Récupérer le controller et l'action depuis l'URL (ou par défaut)
 $controller = isset($_GET['controller']) ? ucfirst($_GET['controller']) . 'Controller' : 'MainController';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 
 // Ajouter le namespace au controller
 $controller = 'App\\Controllers\\' . $controller;
 
-if (class_exists($controller)) {
-    $controllerInstance = new $controller(); // Instancier la classe du controller
-
-    if (method_exists($controllerInstance, $action)) {
-        $controllerInstance->$action(); // Appeler la méthode d'action
-    } else {
-        echo "Action '$action' non trouvée.";
+try {
+    // Vérifier si le contrôleur existe
+    if (!class_exists($controller)) {
+        http_response_code(404);
+        throw new Exception("Contrôleur '$controller' non trouvé.");
     }
-} else {
-    echo "Contrôleur '$controller' non trouvé.";
-}
 
+    $controllerInstance = new $controller();
+
+    // Vérifier si l'action existe
+    if (!method_exists($controllerInstance, $action)) {
+        http_response_code(404);
+        throw new Exception("Action '$action' non trouvée.");
+    }
+
+    // Appeler l'action
+    $controllerInstance->$action();
+} catch (Exception $e) {
+    // Gestion des erreurs avec message
+    error_log($e->getMessage());
+    http_response_code(500);
+    require_once __DIR__ . '/../Views/errors/500.php'; // Page d'erreur interne
+}

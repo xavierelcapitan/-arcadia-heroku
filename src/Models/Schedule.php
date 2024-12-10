@@ -1,48 +1,53 @@
 <?php
-// src/Models/Schedule.php
-
 namespace App\Models;
 
 use App\Config\MongoDBConnection;
 use MongoDB\Exception\Exception;
-use Throwable;
 
 class Schedule {
     private $collection;
 
     public function __construct() {
-        $this->collection = (new MongoDBConnection())
-            ->getConnection()
-            ->selectDatabase('arcadia')
-            ->selectCollection('schedules');
+        try {
+            $this->collection = (new MongoDBConnection())
+                ->getDatabase('arcadia') // Correction ici
+                ->selectCollection('schedules');
+        } catch (\Throwable $e) { // Gestion globale des erreurs
+            error_log('Erreur lors de la connexion à MongoDB : ' . $e->getMessage());
+            throw new \Exception('Connexion à MongoDB impossible.');
+        }
     }
 
     public function getAllSchedules() {
         try {
-            $cursor = $this->collection->find();
+            $cursor = $this->collection->find([], ['sort' => ['day' => 1]]);
             $schedules = [];
             foreach ($cursor as $document) {
                 $schedules[] = [
                     'id' => (string) $document['_id'], // Convertir l'ObjectId en chaîne
-                    'day' => $document['day'],
-                    'opening_time' => $document['opening_time'],
-                    'closing_time' => $document['closing_time'],
-                    'is_closed' => $document['is_closed']
+                    'day' => $document['day'] ?? '',
+                    'opening_time' => $document['opening_time'] ?? '',
+                    'closing_time' => $document['closing_time'] ?? '',
+                    'is_closed' => $document['is_closed'] ?? false
                 ];
             }
             return $schedules;
-        } catch (Throwable $e) {
-            error_log('Erreur MongoDB : ' . $e->getMessage());
+        } catch (\Throwable $e) {
+            error_log('Erreur générale : ' . $e->getMessage());
             return [];
         }
     }
 
     public function insertSchedule($data) {
         try {
+            // Validation stricte des données
+            if (!isset($data['day'], $data['opening_time'], $data['closing_time'], $data['is_closed'])) {
+                throw new \Exception('Les données fournies sont incomplètes.');
+            }
             $this->collection->insertOne($data);
             return true;
-        } catch (Throwable $e) {
-            error_log('Erreur MongoDB : ' . $e->getMessage());
+        } catch (\Throwable $e) {
+            error_log('Erreur générale : ' . $e->getMessage());
             return false;
         }
     }
@@ -54,8 +59,8 @@ class Schedule {
                 ['$set' => $data]
             );
             return true;
-        } catch (Throwable $e) {
-            error_log('Erreur MongoDB : ' . $e->getMessage());
+        } catch (\Throwable $e) {
+            error_log('Erreur générale : ' . $e->getMessage());
             return false;
         }
     }
@@ -64,8 +69,9 @@ class Schedule {
         try {
             $this->collection->deleteOne(['_id' => new \MongoDB\BSON\ObjectId($id)]);
             return true;
-        } catch (Throwable $e) {
-            error_log('Erreur MongoDB : ' . $e->getMessage());
+        } catch (\Throwable $e) {
+            // Capturer toutes les erreurs et loguer leur type
+            error_log('Erreur capturée : ' . get_class($e) . ' - ' . $e->getMessage());
             return false;
         }
     }

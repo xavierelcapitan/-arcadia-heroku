@@ -1,15 +1,20 @@
 <?php
-require '../vendor/autoload.php'; // Charge Composer
+require '../vendor/autoload.php'; // Charge l'autoloader de Composer
 
 try {
-    $client = new \MongoDB\Client("mongodb://localhost:27017");
-    $db = $client->selectDatabase('arcadia');
-    $collection = $db->selectCollection('schedules');
+    // Remplacez par votre URI MongoDB si elle est différente
+    $mongoUri = 'mongodb+srv://xavierelcapitan:mongoarcadia83@ecfxb.qvher.mongodb.net'; // URI par défaut pour MongoDB local
+    $client = new MongoDB\Client($mongoUri);
 
-    $documents = $collection->find()->toArray();
-    echo "<pre>";
-    print_r($documents);
-    echo "</pre>";
+    // Test de connexion
+    echo "Connexion à MongoDB réussie.<br>";
+
+    // Lister toutes les bases de données
+    $databases = $client->listDatabases();
+    echo "Bases de données disponibles :<br>";
+    foreach ($databases as $database) {
+        echo "- " . $database['name'] . "<br>";
+    }
 } catch (\Exception $e) {
-    echo "Erreur lors de la récupération des données : " . $e->getMessage();
+    echo "Erreur de connexion à MongoDB : " . $e->getMessage();
 }

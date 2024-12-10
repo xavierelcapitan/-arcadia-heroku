@@ -1,0 +1,38 @@
+/* Variables CSS */
+:root {
+  /* Couleurs principales */
+  --color-primary: #235C35;     /* vert */
+  --color-primary-hover: #6CB33E;
+  --color-secondary: #E6880B;   /* orange */
+  --color-secondary-hover: #6CB33E;
+  --color-accent: #633411;      /* marron */
+  --color-link: #B3B716;
+  --color-link-hover: #6CB33E;
+
+  /* Couleurs des zones et sections */
+  --color-background: #FFFFFF;
+  --color-section-background: #F2F2E9;
+  --color-footer-background: #6CB33E;
+
+  /* Couleurs du texte */
+  --text-primary: #235C35;
+  --text-secondary: #FDB71B;
+  --text-main: rgb(82, 79, 78); /* pour les paragraphes et autres */
+
+  /* Typographie */
+  --font-primary: 'GTClassicBlack', sans-serif;
+  --font-secondary: 'jaf-bernina-sans-condensed', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-bold: 600;
+
+  /* Tailles de police */
+  --font-size-title-main: 36px; /* Titre principal */
+  --font-size-title-1: 46px;    /* Sous-catégorie 1 */
+  --font-size-title-2: 22px;    /* Sous-catégorie 2 */
+  --font-size-content: 20px;    /* Contenu, paragraphe */
+
+  /* Hauteurs de ligne */
+  --line-height-title-main: 36px;
+  --line-height-title-1: 36px;
+  --line-height-content: 30px;
+}

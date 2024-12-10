@@ -1,0 +1,1180 @@
+/* Variables et Réinitialisation */
+@import url('/assets/css/variables.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styles de base (Mobile-First) */
+body {
+  font-size: var(--font-size-content);
+  font-family: var(--font-primary);
+  color: var(--text-main);
+  background-color: var(--color-background);
+  margin: 0;
+  padding: 0px;
+}
+
+header, footer {
+  text-align: center;
+  color: #fff;
+  width: 100%;
+}
+
+.header-container, .main-nav {
+  width: 100%;
+  max-width: 100vw; 
+  overflow-x: hidden; 
+}
+
+
+h1, h2, h3 {
+  font-family: var(--font-primary);
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: var(--font-size-title-main);
+  line-height: var(--line-height-title-main);
+}
+
+h2 {
+  font-size: var(--font-size-title-1);
+  line-height: var(--line-height-title-1);
+}
+
+/* Boutons et liens */
+button, a {
+  font-size: 16px;
+  padding: 8px 16px;
+  color: #fff;
+  background-color: var(--color-primary);
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover, a:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  header {
+      height: auto;
+      padding: 10px 15px; 
+  }
+}
+
+  .animal-card-detail {
+    margin: 10px 0; 
+  }
+
+  .animal-card-overlay-detail {
+    padding: 8px; 
+  }
+
+
+/* Tablette (≥ 768px) */
+@media (min-width: 768px) {
+  body {
+      font-size: 16px;
+      padding: 20px;
+  }
+
+  .menu-nav {
+    flex-direction: column; 
+}
+
+  header, footer {
+    height: auto;
+    padding: 10px 15px; 
+  }
+
+  button, a {
+      font-size: 18px;
+      padding: 10px 20px;
+  }
+
+  nav a {
+    font-size: 14px; 
+    padding: 8px 12px; 
+}
+
+.logo img {
+  width: 100px; 
+}
+
+  .main-nav {
+  width: 390px;
+  }
+}
+
+/* Desktop (≥ 1024px) */
+@media (min-width: 1024px) {
+  body {
+      font-size: 18px;
+      padding: 30px;
+  }
+
+  header, footer {
+      padding: 20px;
+  }
+
+  .container {
+      width: 80%;
+      max-width: 1200px;
+      margin: 0 auto;
+  }
+
+  button, a {
+      font-size: 20px;
+      padding: 12px 24px;
+  }
+}
+
+
+
+
+/* Styles pour le header */
+.header-container {
+  background-color: var(--color-background);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100vw; 
+  overflow-x: hidden; 
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  width: 200px;
+}
+
+.logo-text .subtitle {
+  color: var(--color-link);
+  font-size: var(--font-size-title-2);
+}
+
+/* Style spécifique pour le lien logo */
+.logo-link {
+  background-color: transparent;
+  padding: 0; 
+  color: inherit; 
+  border: none; /
+}
+
+.logo-link img {
+  display: block; 
+}
+
+
+  /* Styles pour le menu burger */
+
+  .menu-burger {
+    background-color: var(--color-background);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+/* Menu burger */
+.menu-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: transform 0.2s ease;
+}
+
+.menu-button:hover {
+  transform: scale(1.1);
+}
+
+/* Offcanvas */
+.offcanvas {
+  background-color: var(--color-background);
+  color: var(--text-main);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.offcanvas-header {
+  border-bottom: 1px solid var(--color-primary);
+}
+
+.offcanvas-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.offcanvas-body .nav-link {
+  padding: 10px 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-main);
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.offcanvas-body .nav-link:hover {
+  color: var(--color-primary);
+}
+
+/* Icône de fermeture */
+.btn-close {
+  color: #000; 
+  background-color: transparent;
+  z-index: 1050; 
+}
+
+
+.burger-icon {
+  position: relative;
+  width: 24px;
+  height: 2px; /* Épaisseur des traits */
+  background-color: var(--text-main); /* Couleur des traits */
+}
+
+.burger-icon::before,
+.burger-icon::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--text-main); /* Même couleur pour tous les traits */
+}
+
+.burger-icon::before {
+  top: -8px; /* Espacement vers le haut */
+}
+
+.burger-icon::after {
+  top: 8px; /* Espacement vers le bas */
+}
+
+
+
+/* Styles pour le menu principal */
+.main-nav {
+  width: 100%; 
+  max-width: none; 
+  background-color: var(--color-section-background); 
+  display: flex;
+  justify-content: space-around; 
+  gap: 10px; 
+  padding: 0; 
+  border: none; 
+  box-shadow: none; 
+}
+
+
+
+/* Styles pour les boutons du menu principal */
+.main-nav-button {
+  font-size: 18px;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  border-radius: 0;
+  transition: background-color 0.3s ease;
+}
+
+
+
+.button-services {
+  background-color: var(--color-background);
+  color: var(--color-accent);
+  font-weight: bold;
+  border: 2px solid var(--color-background);
+  border-radius: 80px;
+  width: 150px;
+}
+.main-nav-button-famille {
+  background-color: var(--color-accent); 
+}
+
+.main-nav-button-habitats {
+  background-color: var(--color-primary-hover); 
+}
+
+.main-nav-button-contact {
+  background-color: var(--color-secondary);
+}
+
+
+.main-nav-button:hover {
+  opacity: 0.9; 
+}
+
+
+
+
+
+/* Styles pour la bannière */
+.banner-section {
+  position: relative;
+}
+
+.banner-img {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+}
+
+.banner-text {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--color-background);
+  text-align: center;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+}
+
+.habitat-banner {
+  height: 150px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-accent); 
+  color: var(--color-background); 
+  margin-bottom: 20px; 
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour mieux distinguer */
+}
+
+
+.banner-hours-title {
+  font-size: var(--font-size-title-2);
+  line-height: var(--line-height-title-main) !important;
+  color: var(--color-background) !important;
+  font-weight: bold !important;
+}
+
+.opening-hours {
+  font-size: var(--font-size-title-2); 
+}
+
+
+.page-title {
+  font-size: var(--font-size-title-1);
+  font-weight: bold;
+  color: var(--color-background); 
+  text-align: center;
+}
+
+
+
+/* START Container for animal cards */
+.animal-cards-container-detail {
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile-first: 1 card per row */
+  gap: 16px;
+  margin-top: 20px;
+}
+
+/* Card styles for details_habitat.php */
+.animal-card-detail {
+  position: relative;
+  overflow: hidden;
+  background-color: #fff !important; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  margin: 15px 0; 
+  padding: 0; 
+}
+
+
+.animal-card-img-container-detail {
+  position: relative;
+  width: 100%; 
+  border-radius: 10px; 
+  overflow: hidden; 
+  margin: 0;
+}
+
+.animal-card-img-detail {
+  width: 100%; 
+  height: auto; 
+  display: block; 
+}
+
+.animal-card-overlay-detail {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9); 
+  color: var(--color-accent);
+  padding: 10px;
+  text-align: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+
+.animal-card-content-detail {
+  text-align: center;
+}
+
+.animal-title-nature-detail {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--color-accent);
+  margin: 0;
+}
+
+.animal-description-detail {
+  font-size: 14px;
+  color: var(--color-accent);
+  margin: 5px 0 0;
+}
+
+/* Styles par défaut pour les liens dans les cartes d’animaux */
+.animal-card-detail a.animal-link {
+  color: inherit; 
+  background-color: transparent; 
+  padding: 0; 
+  border: none; 
+  text-decoration: none; 
+  display: block; 
+  border-radius: 0; 
+}
+
+/* Responsive styles for details_habitat.php */
+@media (min-width: 768px) {
+  .animal-cards-container-detail {
+      grid-template-columns: 1fr 1fr; /* 2 cards per row on tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  .animal-cards-container-detail {
+      grid-template-columns: 1fr 1fr 1fr 1fr; /* 4 cards per row on desktop */
+  }
+
+  .animal-card-img-container-detail {
+      height: 300px; /* Adjusted height for desktop */
+  }
+}
+/* END Container for */
+
+
+
+
+
+/* ANIMALS DETAILS START */
+.animal-details {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+/* Image et titre de l'animal */
+.animal-image {
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.animal-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.animal-image h1 {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 24px;
+}
+
+/* Description de l'animal */
+.animal-description {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.animal-description h2 {
+  font-size: 24px;
+  color: #4CAF50;
+}
+
+.animal-description p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.find-on-map-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.find-on-map-btn:hover {
+  background-color: #45a049;
+}
+
+/* Informations de base */
+.animal-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.animal-info p {
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Fiche santé */
+.health-record {
+  background-color: #e8f5e9;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.health-record h3 {
+  color: #388e3c;
+}
+
+.health-record p,
+.health-record ul {
+  color: #555;
+}
+
+.health-record ul {
+  padding-left: 20px;
+}
+
+/* Informations sur la nourriture */
+.feeding-info {
+  background-color: #fff3e0;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.feeding-info h3 {
+  color: #ff9800;
+}
+
+.feeding-info p {
+  color: #666;
+  font-weight: bold;
+}
+/* ANIMALS DETAILS END */
+
+
+
+/* Styles pour la section Préparer votre visite */
+.visit-section {
+  background-color: var(--color-primary-hover);
+  padding: 20px;
+  text-align: center;
+}
+
+.visit-subtitle {
+  color: var(--color-accent);
+  font-size: 14px;
+}
+
+.visit-title {
+  font-size: var(--font-size-title-main);
+  line-height: var(--line-height-title-main);
+  color: var(--color-background);
+  font-weight: bold;
+}
+
+
+
+
+/* Styles pour les cards expérience */
+
+.experience-section {
+  background-color: var(--color-background);
+  padding: var(--padding-section);
+}
+
+.experience-title {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.experience-subtitle {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+
+/* Styles pour la card d'expérience */
+.experience-card {
+  width: 100%;
+  overflow: hidden;
+}
+
+.experience-card-img-container {
+  position: relative;
+  width: 100%;
+  height: 100vh; 
+  overflow: hidden;
+}
+
+.experience-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.experience-card-overlay {
+  position: absolute;
+  bottom: 20px; 
+  width: 90%; 
+  left: 50%;
+  transform: translateX(-50%); 
+  background: rgba(255, 255, 255, 0.9); 
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.experience-title-nature {
+  color: var(--color-primary-hover);
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.experience-title-soigneur {
+  color: var(--text-primary);
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.experience-title-vip {
+  color: var(--text-secondary);
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.experience-description {
+  color: var(--text-main, #666);
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.experience-price {
+  color: #8bc34a;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.experience-button {
+  display: inline-block;
+  color: var(--color-primary, #2d4e1d);
+  border: 2px solid var(--color-primary, #2d4e1d);
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.experience-button:hover {
+  background-color: var(--color-primary, #2d4e1d);
+  color: #fff;
+}
+
+
+
+/* Styles pour la card de la carte */
+.map-card {
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.map-card-map iframe {
+  width: 100%;
+  height: 350px;
+  border: none;
+  border-radius: 10px 10px 0 0;
+}
+
+.map-card-content {
+  width: 80%; 
+  margin: -30px auto 20px; 
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  text-align: center;
+  border: 1px solid #ddd; 
+}
+
+.map-icon {
+  font-size: 30px;
+  color: #FFA500;
+  margin-bottom: 10px;
+}
+
+.map-title {
+  font-size: 22px;
+  color: var(--color-primary, #2d4e1d);
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.map-subtitle {
+  font-size: 18px;
+  color: #8bc34a;
+  margin-bottom: 10px;
+}
+
+.map-address, .map-description {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.map-more-link {
+  display: inline-block;
+  font-size: 16px;
+  color: #FFA500;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 15px;
+  transition: color 0.3s ease;
+}
+
+.map-more-link:hover {
+  color: #e58f00;
+}
+
+
+
+/* Styles pour AVIS DES VISITEURS */
+.reviews-container {
+  background-color: #F2F2E9;
+  padding: 20px;
+  text-align: center;
+  height: 350px;
+}
+
+.reviews-title {
+  font-size: 2rem;
+  color: var(--color-primary-hover, #2d4e1d);
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.swiper-container {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 0;
+  overflow: hidden; 
+}
+
+.swiper-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  margin: auto;
+}
+
+.review-slide h3 {
+  font-size: 1.2rem;
+  color: var(--color-primary-hover, #2d4e1d);
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.review-slide p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Assurez-vous que le conteneur Swiper est positionné de manière relative */
+.reviews-container {
+  position: relative;
+  padding: 20px;
+  background-color: #F2F2E9;
+  text-align: center;
+}
+
+.swiper-container {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 0;
+}
+
+/* Position des flèches de navigation */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #2d4e1d; /* Couleur des flèches */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  font-size: 24px;
+}
+
+.swiper-button-next {
+  right: 10px; /* Position à droite */
+}
+
+.swiper-button-prev {
+  left: 10px; /* Position à gauche */
+}
+
+/* Position des points de pagination en bas, centré */
+.swiper-pagination {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+}
+
+/* Style pour le bouton "Publier un avis" */
+.btn-publish-review {
+  background-color: #d9534f; /* Rouge */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 20px auto;
+  display: block;
+  text-align: center;
+}
+
+.btn-publish-review:hover {
+  background-color: #c9302c; /* Rouge foncé au survol */
+}
+
+/* Styles pour la modale */
+.modal {
+  display: none; /* Masqué par défaut */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+}
+
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  margin: 10% auto;
+  padding: 30px 20px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+}
+
+/* Bouton de fermeture */
+.close {
+  color: #555;
+  font-size: 24px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}
+
+/* Titre de la modale */
+.modal-content h2 {
+  color: #2d4e1d;
+  font-size: 24px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Champs de formulaire */
+.modal-content label {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  box-sizing: border-box;
+  resize: vertical;
+  outline: none;
+}
+
+.modal-content input[type="text"]:focus,
+.modal-content input[type="email"]:focus,
+.modal-content textarea:focus {
+  border-color: #8bc34a;
+  box-shadow: 0 0 5px rgba(139, 195, 74, 0.4);
+}
+
+/* Bouton d'envoi */
+.submit-button {
+  background-color: #2d4e1d;
+  color: #fff;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.submit-button:hover {
+  background-color: #3e6a30;
+}
+
+/*******************************************************************************/
+
+/* SERVICES START */
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.card-subtitle .badge {
+  font-size: 0.85rem;
+  background-color: var(--color-accent);
+  color: var(--color-background);
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+.location-badge {
+  font-size: 0.85rem;
+  background-color: var(--color-accent);
+  color: var(--color-background);
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  text-transform: capitalize;
+  font-weight: 500;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+
+.card-text {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #fff; 
+  border: none;
+  padding: 0.5em 1.5em;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-link-hover);
+  text-decoration: none;
+  color: #fff; 
+}
+/* SERVICES END */
+
+
+/*******************************************************************************/
+
+/* SERVICES DETAILS START */
+
+.service-image img {
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.service-description, .service-prices {
+  margin-top: 30px;
+}
+
+.service-prices ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.service-prices ul li {
+  margin-bottom: 10px;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* SERVICES DETAILS END */
+
+
+/*******************************************************************************/
+
+/* Styles pour le footer */
+
+.footer-container {
+  padding: 20px;
+  text-align: center;
+  background-color: var(--color-footer-background);
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+.footer-logo img {
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+.footer-logo h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.footer-logo p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.footer-column h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer-column ul {
+  list-style-type: none;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+  font-size: 14px;
+    text-align: left;
+}
+
+.footer-legals {
+  margin-bottom: 20px;
+}
+
+.footer-legals h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.footer-legal-links a {
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.footer-connection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.footer-connection i {
+  font-size: 20px;
+  margin-right: 8px;
+}

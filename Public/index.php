@@ -10,9 +10,11 @@ require_once __DIR__ . '/../src/Config/Autoloader.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 Autoloader::register();
 
-// Charger les variables d'environnement depuis le fichier .env
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
+// Vérifiez si le fichier .env est nécessaire
+if (file_exists(__DIR__ . '/../.env')) {
+    $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv->load();
+}
 
 // Récupérer le controller et l'action depuis les paramètres d'URL (ou par défaut)
 $controller = isset($_GET['controller']) ? ucfirst($_GET['controller']) . 'Controller' : 'MainController';

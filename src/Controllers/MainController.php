@@ -7,11 +7,20 @@ use App\Models\Schedule;
 
 class MainController {
     public function index() {
-        $scheduleModel = new Schedule(); // Modèle des horaires
+        $scheduleModel = new Schedule(); 
         $schedules = $scheduleModel->getAllSchedules();
 
-        // Obtenez le jour actuel
+        // Vérifiez le jour actuel
         $today = date('l'); // Exemple : "Monday"
+        echo "Jour actuel : " . $today . "<br>";
+
+        // Vérifiez les horaires récupérés
+        echo "<pre>";
+        print_r($schedules);
+        echo "</pre>";
+
+        // Le jour actuel
+        $today = date('l'); 
 
         // Trouvez l'horaire pour aujourd'hui
         $todaySchedule = array_filter($schedules, function ($schedule) use ($today) {

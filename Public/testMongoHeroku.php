@@ -1,11 +1,9 @@
 <?php
-require '../vendor/autoload.php'; // Charge Composer
+require '../vendor/autoload.php';
 
 try {
-    $mongoUri = getenv('MONGO_URI'); // Récupère l'URI depuis les variables d'environnement
-    if (!$mongoUri) {
-        throw new Exception('La variable d\'environnement MONGO_URI est introuvable.');
-    }
+    // URI sans SRV
+    $mongoUri = 'mongodb://xavbarcadia83:xavbarcadia83@cluster0.mongodb.net:27017,cluster0-shard-00-01.mongodb.net:27017,cluster0-shard-00-02.mongodb.net:27017/<database>?ssl=true&replicaSet=atlas-xxxxx-shard-0&authSource=admin&retryWrites=true&w=majority';
 
     $client = new MongoDB\Client($mongoUri);
 

@@ -1,19 +1,13 @@
 <?php
-require '../vendor/autoload.php';
+require '../vendor/autoload.php'; // Charge Composer
 
 try {
-    $mongoUri = getenv('MONGO_URI');
+    $mongoUri = getenv('MONGO_URI'); // Récupère l'URI depuis les variables d'environnement
     if (!$mongoUri) {
         throw new Exception('La variable d\'environnement MONGO_URI est introuvable.');
     }
 
-    // Ajoutez des options pour forcer l'utilisation de TLS 1.2
-    $client = new MongoDB\Client($mongoUri, [], [
-        'ssl' => true,
-        'tlsInsecure' => false,
-        'tlsAllowInvalidCertificates' => false,
-        'tlsCAFile' => '/etc/ssl/certs/ca-certificates.crt', // Certificat CA par défaut sur la plupart des systèmes
-    ]);
+    $client = new MongoDB\Client($mongoUri);
 
     echo "Connexion à MongoDB réussie.<br>";
 

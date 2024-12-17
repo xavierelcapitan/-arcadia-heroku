@@ -1,14 +1,26 @@
 <?php
-require '../vendor/autoload.php';
+// Public/testMongoHeroku.php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Dotenv\Dotenv;   // Utilisation de PHP dotenv
+use MongoDB\Client;
+
+// Charger les variables depuis le fichier .env
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 try {
-    // URI sans SRV
-    $mongoUri = 'mongodb://xavbarcadia83:xavbarcadia83@cluster0.mongodb.net:27017,cluster0-shard-00-01.mongodb.net:27017,cluster0-shard-00-02.mongodb.net:27017/<database>?ssl=true&replicaSet=atlas-xxxxx-shard-0&authSource=admin&retryWrites=true&w=majority';
+    // Utilisation des variables MONGO_URI et MONGO_DB depuis .env
+    $mongoUri = $_ENV['MONGO_URI'];
+    $databaseName = $_ENV['MONGO_DB'];
 
-    $client = new MongoDB\Client($mongoUri);
+    // Connexion au serveur MongoDB
+    $client = new Client($mongoUri);
 
     echo "Connexion à MongoDB réussie.<br>";
 
+    // Liste des bases de données disponibles
     $databases = $client->listDatabases();
     echo "Bases de données disponibles :<br>";
     foreach ($databases as $database) {

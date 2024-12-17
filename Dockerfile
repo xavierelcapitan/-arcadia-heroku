@@ -30,6 +30,8 @@ WORKDIR /var/www/html
 # Copier les fichiers nécessaires pour composer
 COPY composer.json composer.lock ./
 
+
+
 # Installer les dépendances avec Composer
 RUN composer install --no-dev --optimize-autoloader
 

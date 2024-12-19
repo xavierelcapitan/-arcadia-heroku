@@ -25,8 +25,6 @@ class Animal extends Model
     return $stmt->fetch(PDO::FETCH_OBJ);
 }
 
-     
- 
  // Récupérer les types de nourriture distincts de la table animals
  public static function getDistinctFoodTypes()
  {
@@ -34,7 +32,6 @@ class Animal extends Model
      $stmt = $db->query("SELECT DISTINCT food_type FROM animals");
      return $stmt->fetchAll(PDO::FETCH_OBJ);
  }
-
 
     // Récupérer tous les animaux
     public static function all()
@@ -92,8 +89,6 @@ public static function findAllByHabitat($habitatId)
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
-   
-
     // Ajouter un nouvel animal
     public static function add($data)
     {
@@ -105,7 +100,6 @@ public static function findAllByHabitat($habitatId)
         $stmt->execute($data);
     }
 
-
     public static function getById($id)
     {
         $db = self::getDbInstance();
@@ -114,8 +108,6 @@ public static function findAllByHabitat($habitatId)
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
     
-    
-
     // Mettre à jour un animal
     public static function update($id, $data)
     {

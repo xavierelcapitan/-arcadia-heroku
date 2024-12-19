@@ -10,45 +10,31 @@ class ScheduleController {
         $scheduleModel = new Schedule();
         $schedules = $scheduleModel->getAllSchedules();
 
+        $scheduleModel = new Schedule(); 
+$schedules = $scheduleModel->getAllSchedules();
+
+if (empty($schedules)) {
+    error_log('Aucun horaire trouvé depuis MongoDB.');
+    $schedules = [['day' => 'unknown', 'opening_time' => 'Fermé', 'closing_time' => 'Fermé']];
+}
+
+// Le jour actuel
+$today = date('l');
+
+// Filtrer pour le jour actuel
+$todaySchedule = array_filter($schedules, function ($schedule) use ($today) {
+    return strtolower($schedule['day']) === strtolower($today);
+});
+
+$todaySchedule = reset($todaySchedule) ?: [
+    'opening_time' => 'Fermé',
+    'closing_time' => 'Fermé'
+];
+
+
         $view = __DIR__ . '/../../Views/admin/schedules/list.php';
         $pageTitle = 'Liste des Horaires';
         require_once __DIR__ . '/../../Views/layouts/templatedashboard.php';
-    }
-
-    public function create($data) {
-        $scheduleModel = new Schedule();
-        $success = $scheduleModel->insertSchedule($data);
-
-        if ($success) {
-            header('Location: /admin/schedules/list.php');
-            exit;
-        } else {
-            echo "Erreur lors de la création de l'horaire.";
-        }
-    }
-
-    public function edit($id, $data) {
-        $scheduleModel = new Schedule();
-        $success = $scheduleModel->updateSchedule($id, $data);
-
-        if ($success) {
-            header('Location: /admin/schedules/list.php');
-            exit;
-        } else {
-            echo "Erreur lors de la mise à jour de l'horaire.";
-        }
-    }
-
-    public function delete($id) {
-        $scheduleModel = new Schedule();
-        $success = $scheduleModel->deleteSchedule($id);
-
-        if ($success) {
-            header('Location: /admin/schedules/list.php');
-            exit;
-        } else {
-            echo "Erreur lors de la suppression de l'horaire.";
-        }
     }
 }
 

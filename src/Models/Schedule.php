@@ -1,21 +1,15 @@
 <?php
 namespace App\Models;
 
-use App\Config\MongoDBConnection;
-use MongoDB\Exception\Exception;
+use App\Config\MongoConnection;
+use MongoDB\BSON\ObjectId;
 
-class Schedule {
+class Schedule extends MongoConnection {
     private $collection;
 
     public function __construct() {
-        try {
-            $this->collection = (new MongoDBConnection())
-                ->getDatabase('arcadia') // Correction ici
-                ->selectCollection('schedules');
-        } catch (\Throwable $e) { // Gestion globale des erreurs
-            error_log('Erreur lors de la connexion à MongoDB : ' . $e->getMessage());
-            throw new \Exception('Connexion à MongoDB impossible.');
-        }
+        parent::__construct();
+        $this->collection = $this->getCollection('arcadia', 'schedules'); // Nom correct de la collection
     }
 
     public function getAllSchedules() {
@@ -33,49 +27,9 @@ class Schedule {
             }
             return $schedules;
         } catch (\Exception $e) {
-            // Loguez l'erreur pour la diagnostiquer
             error_log('Erreur lors de la récupération des horaires : ' . $e->getMessage());
             return [];
         }
     }
-    
-    
-
-    public function insertSchedule($data) {
-        try {
-            // Validation stricte des données
-            if (!isset($data['day'], $data['opening_time'], $data['closing_time'], $data['is_closed'])) {
-                throw new \Exception('Les données fournies sont incomplètes.');
-            }
-            $this->collection->insertOne($data);
-            return true;
-        } catch (\Throwable $e) {
-            error_log('Erreur générale : ' . $e->getMessage());
-            return false;
-        }
-    }
-
-    public function updateSchedule($id, $data) {
-        try {
-            $this->collection->updateOne(
-                ['_id' => new \MongoDB\BSON\ObjectId($id)],
-                ['$set' => $data]
-            );
-            return true;
-        } catch (\Throwable $e) {
-            error_log('Erreur générale : ' . $e->getMessage());
-            return false;
-        }
-    }
-
-    public function deleteSchedule($id) {
-        try {
-            $this->collection->deleteOne(['_id' => new \MongoDB\BSON\ObjectId($id)]);
-            return true;
-        } catch (\Throwable $e) {
-            // Capturer toutes les erreurs et loguer leur type
-            error_log('Erreur capturée : ' . get_class($e) . ' - ' . $e->getMessage());
-            return false;
-        }
-    }
 }
+

@@ -9,8 +9,8 @@ class MainController {
     public function index() {
 
         
-$scheduleModel = new Schedule(); 
-$schedules = $scheduleModel->getAllSchedules();
+$Schedule = new Schedule(); 
+$schedules = $Schedule->getAllSchedules();
 
 // Le jour actuel
 $today = date('l'); 
@@ -19,11 +19,6 @@ $today = date('l');
 $todaySchedule = array_filter($schedules, function ($schedule) use ($today) {
     return strtolower($schedule['day']) === strtolower($today);
 });
-
-if (empty($todaySchedule)) {
-    echo "Aucun horaire trouvé pour le jour : " . $today;
-}
-
 
 $todaySchedule = reset($todaySchedule); // Récupère le premier résultat (ou null si vide)
 

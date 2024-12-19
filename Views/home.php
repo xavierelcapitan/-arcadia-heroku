@@ -38,13 +38,7 @@
     <section class="experience-section text-center mt-5">
         <h3 class="experience-title mb-2 px-4">Vivez une expérience inoubliable au Zoo d'Arcadia</h3>
         <p class="experience-subtitle m-4">Quelle expérience préférez-vous ?</p>
-        <?php
-var_dump($todaySchedule);
-?>
     </section>
-    
-
-  
 
     <!-- Section card expériences -->
 <section class="experience-card">
